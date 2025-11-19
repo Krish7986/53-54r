@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-w*snr=zuw8v6j_go71s9r1vzye%q(gf&hqab&#qcr(%nnh5gty
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['five3-54r.onrender.com']
+ALLOWED_HOSTS = ["127.0.0.1"]
 
 
 # Application definition
@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'myapp'
 ]
 
 MIDDLEWARE = [
@@ -47,6 +48,14 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'myapp.middelware.myappMiddelware',
+    'myapp.middelware.usernameMiddelware',
+    'myapp.middelware.emailMiddelware',
+    'myapp.middelware.passwordMiddelware',
+    # 'myapp.middelware.medicalMiddelware',
+    # 'myapp.middelware.sscMiddelware',
+    # 'myapp,middelware.ageMiddelware'
+
 ]
 
 ROOT_URLCONF = 'myproject.urls'
@@ -74,10 +83,19 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': "10000coders",       # example: 'mydb'
+        'USER': 'root',      # example: 'root'
+        'PASSWORD': '2002',  # example: '1234'
+        'HOST': '127.0.0.1',                # keep as 'localhost' for local setup
+        'PORT': '3306',                     # default MySQL port
+        'OPTIONS': {
+            "charset": "utf8mb4",
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+        }                                                           
     }
 }
+
 
 
 # Password validation
