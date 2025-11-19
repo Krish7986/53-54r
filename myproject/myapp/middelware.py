@@ -60,6 +60,7 @@ class myappMiddelware:
 #             if(age_checker < 18 or age_checker > 25):
 #                 return JsonResponse({"Error":"your not eligible must be >18"})
 #         return self.get_response(request)
+
 class usernameMiddelware:
     def __init__(self,get_response):
         self.get_response = get_response
@@ -100,7 +101,7 @@ class emailMiddelware:
             if Users.objects.filter(email= user_email).exists():
                 return JsonResponse({"Error":"Email already exits"},status = 400)
         return self.get_response(request)
-            
+
 class passwordMiddelware:
     def __init__(self,get_response):
         self.get_response = get_response 
