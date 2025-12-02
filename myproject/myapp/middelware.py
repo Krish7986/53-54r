@@ -66,7 +66,7 @@ class usernameMiddelware:
         self.get_response = get_response
     def __call__(self,request):
         if request.path == "/signup/":
-            data = json.loads(request.body)
+            data = request.POST
             from myapp.models import Users
             user_name = data.get("username")
             if not user_name:
@@ -89,13 +89,13 @@ class emailMiddelware:
     def __call__(self,request):
         if request.path == "/signup/":
             from myapp.models import Users
-            data = json.loads(request.body)
+            data = request.POST
             user_email = data.get("email")
             if not user_email:
                 return JsonResponse({"Error":"emailmust requried "},status = 400)
             pattern = r"^[A-Za-z0-9.&*]+@gmail\.com$"
             if not re.match(pattern,user_email):
-                return JsonResponse({"Error":"mail format is not matched"},status = 400)
+                return JsonResponse({"Error":"mail format should be abc@gmail.com"},status = 400)
             if " " in user_email or "__" in user_email:
                 return JsonResponse({"Error": "Username cannot contain .., __, or spaces"}, status=400)
             if Users.objects.filter(email= user_email).exists():
@@ -107,19 +107,37 @@ class passwordMiddelware:
         self.get_response = get_response 
     def __call__(self,request):
         if request.path == "/signup/":
-            data = json.loads(request.body)
+            data = request.POST
             password = data.get("password")
             username = data.get("username")
             if not password:
                 return JsonResponse({"Error":"must requried password"},status = 400)
             if not password[0].isupper():
                 return JsonResponse({"Error":" password first letter should be capitial"},status = 400)
-            if len(password) > 6:
-                return JsonResponse({"Error":"password should be less than 6 letter"},status = 400)
+            # if len(password) > 8:
+            #     return JsonResponse({"Error":"password should be less than 6 letter"},status = 400)
             if re.match(username[0:4],password[0:4]):
-                return JsonResponse({"Error":"username and password does not matched"},status = 400)
-        return self.get_response(request) 
+                return JsonResponse({"Error":"username and password does not matched "},status = 400)
+            if not re.match(r"^[A-Za-z0-9]+[@#%*]{1}+[.\w]+$",password):
+                return JsonResponse({"Error":"password should not strong"},status = 400)
+        return self.get_response(request)   
 
 
+
+# class movie_nameMiddelware:
+#     def __init__(self,get_response):
+#         self.get_response = get_response
+#     def __call__(self,request):
+#         if request.path == "/movie/" and request.method == "POST":
+#              data = request.POST
+#              if not data.get("name"):
+#                 return JsonResponse({"Error":"movie name must be requried"},status  = 400)
+#         return self.get_response(request)
+    
+
+
+
+
+        
         
             

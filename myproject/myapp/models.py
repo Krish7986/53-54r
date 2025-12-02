@@ -8,4 +8,9 @@ class Users(models.Model):
     username = models.CharField(max_length=100,unique=True)
     email = models.EmailField(max_length=100,unique=True)
     password = models.CharField(max_length=100)
-# Create your models here.
+
+class Movie(models.Model):
+    movie_name = models.CharField(max_length = 100)
+    movie_date = models.DateField()
+    movie_rating = models.FloatField()
+    movie_budget = models.CharField(max_length=100)

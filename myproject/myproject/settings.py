@@ -52,9 +52,8 @@ MIDDLEWARE = [
     'myapp.middelware.usernameMiddelware',
     'myapp.middelware.emailMiddelware',
     'myapp.middelware.passwordMiddelware',
-    # 'myapp.middelware.medicalMiddelware',
-    # 'myapp.middelware.sscMiddelware',
-    # 'myapp,middelware.ageMiddelware'
+    # 'myapp.middelware.movie_nameMiddelware'
+    
 
 ]
 
@@ -84,7 +83,7 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': "10000coders",       # example: 'mydb'
+        'NAME': "django",       # example: 'mydb'
         'USER': 'root',      # example: 'root'
         'PASSWORD': '2002',  # example: '1234'
         'HOST': '127.0.0.1',                # keep as 'localhost' for local setup

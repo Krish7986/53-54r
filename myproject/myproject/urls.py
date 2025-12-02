@@ -20,7 +20,7 @@ from django.urls import path,include
 from myapp.views import add
 from myapp.views import sample_view 
 from myapp.views import health
-from myapp.views import addstudents,signup
+from myapp.views import addstudents,signup,login,check,forget_password
 
 urlpatterns = [
     path('',include('myapp.urls')),
@@ -32,5 +32,8 @@ urlpatterns = [
     path("add2/",addstudents),
     # path("job1/",job1),
     # path("job2/",job2),
-    path("signup/",signup)
-]
+    path("signup/",signup),
+    path('login/',login),
+    path('check/',check),
+    path('forget_password',forget_password)
+] 
